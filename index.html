@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script>
+         var flag = "";
+         var userEmail = "amit@gmail.com";
+         var userMobile = "+919876543210";
+         var userPwd = "amit@44";
+
+         function ToggleContainers(){
+            document.getElementById("pwdContainer").style.display = "block";
+            document.getElementById("userContainer").style.display = "none";
+         }
+
+         function ContinueClick(){
+              var userid = document.getElementById("txtId").value;
+              var lblUserError = document.getElementById("lblUserError");
+              if(userid===userEmail) {
+                  flag = `Login Success - Activation link sent to your email ${userid}`;
+                  ToggleContainers();
+              }
+              else if(userid===userMobile) {
+                  flag = `Login Success - OTP sent to your mobile ${userid}`;
+                  ToggleContainers();
+              } else {
+                  lblUserError.innerHTML = `${userid} doesn't exists`;
+              }
+         }
+
+         function LoginClick(){
+             var password = document.getElementById("txtPwd").value;
+             if(password===userPwd) {
+                 document.write(`<h1>${flag}</h1>`);
+             } else {
+                document.getElementById("lblPwdError").innerHTML = "Invalid Password";
+             }
+         }
+
+
+    </script>
+</head>
+<body class="container-fluid d-flex justify-content-center">
+   <div class="mt-4 border border-1 rounded p-3 w-25">
+       <h1>Amazon Login</h1>
+       <div id="userContainer">
+           <div>
+               <label class="form-label fw-bold">Email or Mobile phone number</label>
+               <div>
+                <input type="text" class="form-control" id="txtId">
+                <div class="text-danger" id="lblUserError"></div>
+               </div>
+               <div class="mt-3">
+                  <button onclick="ContinueClick()" class="btn btn-warning w-100">Continue</button>
+               </div>
+           </div>
+       </div>
+       <div id="pwdContainer" style="display: none;">
+           <div>
+              <label class="form-label fw-bold">Your password</label>
+              <div>
+                <input type="password" id="txtPwd" class="form-control">
+                <div id="lblPwdError" class="text-danger"></div>
+              </div>
+              <div class="mt-2">
+                <button onclick="LoginClick()" class="btn btn-warning w-100">Login</button>
+              </div>
+           </div>
+       </div>
+   </div>
+</body>
+</html>
