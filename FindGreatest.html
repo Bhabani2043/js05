@@ -1,0 +1,16 @@
+<script>
+        function FindGreatest(a,b,c){
+            if (a>b && a>c){
+                document.write(`a=${a} is greater than b=${b} & c=${c}`);
+            }else if(b>c) {
+                document.write(`b=${b} is greater then a=${a} & c=${c}`);
+            }else {
+                document.write(`c=${c} is greater than a=${a} & b=${b}`);
+            }
+        }
+        FindGreatest(
+            parseInt(prompt("Enter A")),
+            parseInt(prompt("Enter B")),
+            parseInt(prompt("Enter C")),
+        )
+    </script>
