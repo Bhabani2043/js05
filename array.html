@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="./src/array.js"> </script>
+</head>
+<body class="container-fluid" onload="LoadAppointments()">
+    <div class="row mt-4">
+        <div class="col-4">
+            <h3>Appointments</h3>
+            <div>
+                <div class="input-group">
+                    <input type="text" id="txtAppointment" placeholder="New Appointment" class="form-control">
+                    <button onclick="AddClick()" class="btn btn-primary bi bi-calendar"> Add </button>
+                </div>
+            </div>
+            <div class="my-4">
+                <div class="my-3">
+                    <button onclick="SortAsc()" class="btn btn-success bi bi-sort-alpha-down"></button>
+                    <button onclick="SortDsc()" class="btn btn-success bi bi-sort-alpha-up mx-2"></button>
+                </div>
+                <label class="form-label fw-bold">Your Appointments</label>
+                <select size="3" id="lstAppointments" class="form-select">
+
+                </select>
+                <label id="lblCount" class="form-label fw-bold"></label>
+            </div>
+            <div class="my-2 d-flex justify-content-between">
+                <button onclick="EditClick()" data-bs-target="#edit" data-bs-toggle="modal" class="bi bi-pen-fill btn btn-warning"> Edit </button>
+                <div class="modal fade" id="edit">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>Edit Appointment</h3>
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" id="txtEditAppointment" class="form-control">
+                            </div>
+                            <div class="modal-footer">
+                                <button onclick="SaveClick()" data-bs-dismiss="modal" class="btn btn-success"> Save</button>
+                                <button data-bs-dismiss="modal" class="btn btn-danger"> Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="DeleteClick()" class="bi bi-trash btn btn-danger"> Delete</button>
+                <button onclick="ClearClick()" class="bi bi-trash-fill btn btn-outline-danger"> Clear All</button>
+            </div>
+        </div>
+        <div class="col-8">
+
+        </div>
+    </div>
+</body>
+</html>
