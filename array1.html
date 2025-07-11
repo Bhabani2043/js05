@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+</head>
+<body>
+    <h2>Product List</h2>
+    <ol id="product-list"></ol>
+
+    <script>
+        const products = ["tv", "mobile", "Refrigerator", "iron box"];
+        const list = document.getElementById('product-list');
+
+        list.innerHTML = products.map(product => `<li>${product}</li>`).join('');
+    </script>
+</body>
+</html>

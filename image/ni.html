@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shorthand Toggle</title>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css" />
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+  <script>
+    function checkClick() {
+      const btn = document.querySelector('button');
+      btn.className = btn.classList.contains('btn-success') 
+        ? 'btn btn-danger bi bi-trash' 
+        : 'btn btn-success bi bi-check';
+    }
+  </script>
+</head>
+<body>
+  <button onclick="checkClick()" class="btn btn-success bi bi-check"></button>
+</body>
+</html>
