@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <script>
+        var ms = 0;
+        var sec = 0;
+        function SetMilliSeconds(){
+            ms++;
+            document.getElementById("milli").innerHTML = ms;
+            if(ms===999){
+                sec++;
+                ms=0;
+            }
+            document.getElementById("seconds").innerHTML = sec;
+        }
+        var t1;
+        function StartClick(){
+            t1 = setInterval(SetMilliSeconds,0.1);
+        }
+        function StopClick(){
+            clearInterval(t1);
+            document.getElementById("milli").innerHTML = 0;
+            document.getElementById("seconds").innerHTML = 0;
+        }
+    </script>
+    <style>
+        .timer {
+            width: 300px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .timer span {
+            display: inline-block;
+            border:1px solid gray;
+            height: 50px;
+            width: 80px;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body class="container-fluid">
+    <div class="mt-4 d-flex justify-content-center">
+        <div>
+            <div class="text-center">
+                <button onclick="StartClick()" class="btn btn-success">Start</button>
+                <button onclick="StopClick()" class="btn btn-danger">Stop</button>
+            </div>
+            <div class="mt-4 text-center">
+                <div class="timer">
+                    <span id="minutes"></span>
+                    <span id="seconds"></span>
+                    <span id="milli"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
