@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+    function changeText() {
+      document.getElementById("myParagraph").innerText = "Text changed!";
+    }
+
+    function toggleContent() {
+      const paragraph = document.getElementById("toggleText");
+      const button = document.getElementById("toggleButton");
+
+      if (paragraph.innerText === "Click the button to toggle text.") {
+        paragraph.innerText = "The text has been changed!";
+        button.innerText = "Undo";
+      } else {
+        paragraph.innerText = "Click the button to toggle text.";
+        button.innerText = "Toggle";
+      }
+    }
+  </script>
+</head>
+<body>
+    <p id="myParagraph">Hello!</p>
+  <button onclick="changeText()">Change Text</button>
+
+  <p id="toggleText">Click the button to toggle text.</p>
+  <button id="toggleButton" onclick="toggleContent()">Toggle</button>
+
+  
+</body>
+</html>
