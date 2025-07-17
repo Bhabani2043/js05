@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    body { font-family: Arial; padding: 20px; }
+    .non-letter { color: red; }
+  </style>
+
+  <script>
+    function processText() {
+      const input = document.getElementById("inputText").value;
+      const shift = parseInt(document.getElementById("shiftAmount").value);
+      const mode = document.getElementById("mode").value;
+      const resultArea = document.getElementById("output");
+
+      let result = "";
+
+      for (let char of input) {
+        if (char.match(/[a-zA-Z]/)) {
+          let code = char.charCodeAt(0);
+          let base = (char >= 'a') ? 97 : 65;
+          let offset = (mode === "encode") ? shift : -shift;
+          let shifted = ((code - base + offset + 26) % 26) + base;
+          result += String.fromCharCode(shifted);
+        } else {
+          result += `<span class="non-letter">${char}</span>`;
+        }
+      }
+
+      resultArea.innerHTML = result;
+    }
+  </script>
+
+</head>
+<body>
+  <h2>🔐 Custom Cipher Machine</h2>
+  
+  <label>Enter text:</label>
+  <input type="text" id="inputText" oninput="processText()">
+  
+  <br><br>
+  
+  <label>Shift by:</label>
+  <input type="number" id="shiftAmount" value="1" min="1" max="25" onchange="processText()">
+
+  <br><br>
+
+  <label>Mode:</label>
+  <select id="mode" onchange="processText()">
+    <option value="encode">Encode</option>
+    <option value="decode">Decode</option>
+  </select>
+
+  <br><br>
+
+  <p>🔎 Result: <span id="output"></span></p>
+
+  
+</body>
+</html>
