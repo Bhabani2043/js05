@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Reset some basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+label {
+    font-size: 18px;
+    color: #555;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #4cafa7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #a07445;
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+    </style>
+    <script>
+        function findMaxMinFromInput() {
+    // Get the value of the input field
+    let input = document.getElementById('numbersInput').value;
+
+    // If the input is empty, return an error
+    if (input.trim() === "") {
+        displayResult("Please enter some numbers.", true);
+        return;
+    }
+
+    // Convert input string to an array of numbers
+    let arr = input.split(',').map(num => parseFloat(num.trim()));
+
+    // Check if the array contains valid numbers
+    if (arr.length === 0 || arr.some(isNaN)) {
+        displayResult("Please enter valid numbers.", true);
+        return;
+    }
+
+    // Find the maximum and minimum values
+    let max = Math.max(...arr);
+    let min = Math.min(...arr);
+
+    // Display the result
+    displayResult(`Maximum Value: ${max} <br> Minimum Value: ${min}`);
+}
+
+// Function to display the result in the result div
+function displayResult(message, isError = false) {
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = message;
+    
+    if (isError) {
+        resultDiv.classList.add('error');
+    } else {
+        resultDiv.classList.remove('error');
+    }
+}
+
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Find Maximum and Minimum Values</h1>
+        <label for="numbersInput">Enter numbers separated by commas:</label>
+        <input type="text" id="numbersInput" placeholder="e.g. 5, 12, 3, 9">
+        <button onclick="findMaxMinFromInput()">Find Max & Min</button>
+        
+        <div class="result" id="result">
+            <!-- Result will be displayed here -->
+        </div>
+    </div>
+</body>
+</html>
