@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function sumOfNumbers() {
+    // Step 1: Ask user how many numbers they want to enter
+    let numCount = parseInt(prompt("How many numbers do you want to enter?"));
+
+    // Step 2: Initialize an array to store the numbers
+    let numbers = [];
+    
+    // Step 3: Collect numbers from the user
+    for (let i = 1; i <= numCount; i++) {
+        let number = parseInt(prompt(`Enter number ${i}:`));
+        numbers.push(number);  // Add the number to the array
+    }
+
+    // Step 4: Calculate the sum of the numbers
+    let sum = numbers.reduce((acc, num) => acc + num, 0);
+
+    // Step 5: Display the sum
+    alert("Sum of all numbers: " + sum);
+}
+
+// Call the function to run the program
+sumOfNumbers();
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
