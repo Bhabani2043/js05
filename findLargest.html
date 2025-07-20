@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function findLargestNumber() {
+        // Prompt the user to enter numbers separated by commas
+        let input = prompt("Enter numbers separated by commas:");
+
+        // Convert the string input into an array of numbers
+        let numbers = input.split(',').map(Number);
+
+        // Find the largest number in the array
+        let largestNumber = Math.max(...numbers);
+
+        // Display the result
+        alert("The largest number is: " + largestNumber);
+      }
+
+      // Call the function
+      findLargestNumber();
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
