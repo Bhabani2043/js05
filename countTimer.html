@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Countdown Timer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background-color: #f0f0f0;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding: 10px;
+      width: 100px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 5px;
+      cursor: pointer;
+      background: #ffffff;
+    }
+
+    #timerDisplay {
+      margin-top: 30px;
+      font-size: 50px;
+      color: #000000;
+    }
+
+    #message {
+      margin-top: 20px;
+      font-size: 60px;
+      color: rgb(183, 0, 0);
+    }
+  </style>
+</head>
+<body>
+  <h1>Countdown Timer</h1>
+  <input type="number" id="timeInput" placeholder="Seconds" min="1" />
+  <br />
+  <button id="startBtn">Start</button>
+  <button id="pauseBtn" disabled>Pause</button>
+  <button id="resetBtn" disabled>Reset</button>
+
+  <div id="timerDisplay">00:00</div>
+  <div id="message"></div>
+
+  <script>
+    const timeInput = document.getElementById('timeInput');
+    const startBtn = document.getElementById('startBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const message = document.getElementById('message');
+
+    let countdown;
+    let remainingTime = 0;
+
+    function formatTime(seconds) {
+      const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
+      const secs = String(seconds % 60).padStart(2, '0');
+      return `${mins}:${secs}`;
+    }
+
+    function updateDisplay() {
+      timerDisplay.textContent = formatTime(remainingTime);
+    }
+
+    function startTimer() {
+      const inputSeconds = parseInt(timeInput.value);
+      if (isNaN(inputSeconds) || inputSeconds <= 0) {
+        alert('Please enter a valid number greater than 0');
+        return;
+      }
+
+      remainingTime = inputSeconds;
+      updateDisplay();
+      message.textContent = '';
+
+      startBtn.disabled = true;
+      pauseBtn.disabled = false;
+      resetBtn.disabled = false;
+      timeInput.disabled = true;
+
+      countdown = setInterval(() => {
+        remainingTime--;
+        updateDisplay();
+
+        if (remainingTime <= 0) {
+          clearInterval(countdown);
+          message.textContent = "Time's up!";
+          pauseBtn.disabled = true;
+        }
+      }, 1000);
+    }
+
+    function pauseTimer() {
+      clearInterval(countdown);
+      startBtn.disabled = false;
+      pauseBtn.disabled = true;
+    }
+
+    function resetTimer() {
+      clearInterval(countdown);
+      remainingTime = 0;
+      updateDisplay();
+      message.textContent = '';
+      timeInput.value = '';
+      timeInput.disabled = false;
+
+      startBtn.disabled = false;
+      pauseBtn.disabled = true;
+      resetBtn.disabled = true;
+    }
+
+    startBtn.addEventListener('click', startTimer);
+    pauseBtn.addEventListener('click', pauseTimer);
+    resetBtn.addEventListener('click', resetTimer);
+  </script>
+</body>
+</html>
