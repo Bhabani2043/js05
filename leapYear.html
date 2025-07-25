@@ -31,7 +31,17 @@
       resultDiv.textContent = "";
 
       
-     
+      if (yearInput === "" || isNaN(year)) {
+        resultDiv.textContent = "Please enter a valid numeric year.";
+        resultDiv.style.color = "red";
+        return;
+      }
+
+      if (year < 1000 || year > 9999) {
+        resultDiv.textContent = "Please enter a year between 1000 and 9999.";
+        resultDiv.style.color = "red";
+        return;
+      }
 
       if (isNaN(year)) {
         resultDiv.textContent = "Please enter a valid year.";
