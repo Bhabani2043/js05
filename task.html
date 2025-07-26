@@ -1,50 +1,19 @@
- <script>
-    const questions = [
-      {
-        question: "What is the capital of France?",
-        options: ["A: Paris", "B: Rome", "C: Berlin", "D: Madrid"],
-        answer: "A"
-      },
-      {
-        question: "Who wrote '1984'?",
-        options: ["A: Orwell", "B: Huxley", "C: Bradbury", "D: Tolkien"],
-        answer: "A"
-      },
-      {
-        question: "What is 5 * 6?",
-        options: ["A: 30", "B: 11", "C: 56", "D: 20"],
-        answer: "A"
-      },
-      {
-        question: "Which language is used to style web pages?",
-        options: ["A: HTML", "B: CSS", "C: JavaScript", "D: Python"],
-        answer: "B"
-      },
-      {
-        question: "Which of these is a JavaScript framework?",
-        options: ["A: Django", "B: Laravel", "C: React", "D: Flask"],
-        answer: "C"
-      }
-    ];
-
-    let score = 0;
-
-    for (let i = 0; i < questions.length; i++) {
-      const q = questions[i];
-      const userAnswer = prompt(`${q.question}\n${q.options.join('\n')}\n(Type A, B, C, or D)`);
-
-      if (!userAnswer) {
-        alert("No answer given. Moving to the next question.");
-        continue;
-      }
-
-      if (userAnswer.trim().toUpperCase() === q.answer) {
-        alert("✅ Correct!");
-        score++;
-      } else {
-        alert(`❌ Wrong! The correct answer was ${q.answer}`);
-      }
-    }
-
-    alert(`🏁 Quiz finished!\nYour final score: ${score} / ${questions.length}`);
-  </script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task List</title>
+  <link rel="stylesheet" href="./css/task.css">
+</head>
+<body>
+  <div class="container">
+    <h1>My Task List</h1>
+    <form id="task-form">
+      <input type="text" id="task-input" placeholder="Enter a task" required>
+      <button type="submit">Add Task</button>
+    </form>
+    <ul id="task-list"></ul>
+  </div>
+  <script src="./src/task.js"></script>
+</body>
+</html>
