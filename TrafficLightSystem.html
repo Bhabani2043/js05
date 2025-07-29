@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Traffic Light with Timer and Sound</title>
+  <style>
+    body {
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      background-color: #222;
+      font-family: sans-serif;
+      color: white;
+      flex-direction: column;
+    }
+
+    .timer {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .traffic-light {
+      background: #333;
+      padding: 20px;
+      border-radius: 15px;
+      width: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .light {
+      width: 60px;
+      height: 60px;
+      background-color: #555;
+      border-radius: 50%;
+      transition: background-color 0.3s ease;
+    }
+
+    .red.active {
+      background-color: red;
+    }
+
+    .yellow.active {
+      background-color: yellow;
+    }
+
+    .green.active {
+      background-color: limegreen;
+    }
+
+    .start-btn {
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="start-btn" onclick="startSimulation()">Start</button>
+  <div class="timer" id="timer">Waiting to start...</div>
+
+  <div class="traffic-light">
+    <div class="light red" id="red"></div>
+    <div class="light yellow" id="yellow"></div>
+    <div class="light green" id="green"></div>
+  </div>
+
+  <script>
+    const red = document.getElementById('red');
+    const yellow = document.getElementById('yellow');
+    const green = document.getElementById('green');
+    const timerDisplay = document.getElementById('timer');
+
+    let currentLight = 'red';
+    let timerInterval;
+    let countdown = 0;
+    let audioContext;
+
+    function startSimulation() {
+      // Create AudioContext after user interaction
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+
+      document.querySelector('.start-btn').style.display = 'none';
+      setActive(red, 10, 440); // Start with red
+    }
+
+    function setActive(lightElement, duration, toneFreq) {
+      red.classList.remove('active');
+      yellow.classList.remove('active');
+      green.classList.remove('active');
+
+      lightElement.classList.add('active');
+      countdown = duration;
+      updateTimerDisplay();
+
+      playBeep(toneFreq);
+
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        countdown--;
+        updateTimerDisplay();
+        if (countdown <= 0) {
+          clearInterval(timerInterval);
+          switchLight();
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      timerDisplay.textContent = `Time left: ${countdown} sec`;
+    }
+
+    function switchLight() {
+      if (currentLight === 'red') {
+        currentLight = 'yellow';
+        setActive(yellow, 10, 880);
+      } else if (currentLight === 'yellow') {
+        currentLight = 'green';
+        setActive(green, 15, 660);
+      } else if (currentLight === 'green') {
+        currentLight = 'red';
+        setActive(red, 10, 440);
+      }
+    }
+
+    function playBeep(frequency) {
+      if (!audioContext) return;
+
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+
+      oscillator.type = 'sine';
+      oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      oscillator.start();
+      gainNode.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.3);
+      oscillator.stop(audioContext.currentTime + 0.3);
+    }
+  </script>
+
+</body>
+</html>
