@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Currency Converter with Flags</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f0f0f0;
+      text-align: center;
+    }
+
+    .converter {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 10px;
+      display: inline-block;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    }
+
+    input, select, button {
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      width: 90%;
+      max-width: 300px;
+    }
+
+    button {
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.4s ease;
+    }
+
+    button:hover {
+      background-color: #094589;
+    }
+
+    .flag-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .flag-container img {
+      width: 30px;
+      height: 20px;
+      object-fit: cover;
+      border: 1px solid #ccc;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="converter">
+    <h2>Currency Converter</h2>
+
+    <input type="number" id="amount" placeholder="Enter amount" />
+
+    <div class="flag-container">
+      <img id="fromFlag" src="" alt="From Flag">
+      <select id="fromCurrency" onchange="updateFlag('from')"></select>
+    </div>
+
+    <div class="flag-container">
+      <img id="toFlag" src="" alt="To Flag">
+      <select id="toCurrency" onchange="updateFlag('to')"></select>
+    </div>
+
+    <button onclick="convertCurrency()">Convert</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const API_KEY = "fca_live_5Nh8Ls9sJY6qlsqtD88qED2XG95gVSN40I5AoR8d";
+    const fromCurrency = document.getElementById("fromCurrency");
+    const toCurrency = document.getElementById("toCurrency");
+    const fromFlag = document.getElementById("fromFlag");
+    const toFlag = document.getElementById("toFlag");
+    const resultDiv = document.getElementById("result");
+
+    // Currency to country code mapping for flags
+    const currencyFlags = {
+      USD: "us", EUR: "eu", GBP: "gb", INR: "in", CAD: "ca", AUD: "au",
+      JPY: "jp", CNY: "cn", BRL: "br", ZAR: "za", SGD: "sg", CHF: "ch"
+    };
+
+    const currencies = Object.keys(currencyFlags);
+
+    // Populate dropdowns
+    currencies.forEach((currency) => {
+      const option1 = new Option(currency, currency);
+      const option2 = new Option(currency, currency);
+      fromCurrency.add(option1);
+      toCurrency.add(option2);
+    });
+
+    fromCurrency.value = "USD";
+    toCurrency.value = "INR";
+
+    // Set initial flags
+    updateFlag("from");
+    updateFlag("to");
+
+    function updateFlag(type) {
+      const currency = type === "from" ? fromCurrency.value : toCurrency.value;
+      const flagCode = currencyFlags[currency];
+      const flagUrl = `https://flagcdn.com/48x36/${flagCode}.png`;
+
+      if (type === "from") {
+        fromFlag.src = flagUrl;
+        fromFlag.alt = currency;
+      } else {
+        toFlag.src = flagUrl;
+        toFlag.alt = currency;
+      }
+    }
+
+    async function convertCurrency() {
+      const amount = parseFloat(document.getElementById("amount").value);
+      const from = fromCurrency.value;
+      const to = toCurrency.value;
+
+      if (!amount || amount <= 0) {
+        alert("Please enter a valid amount.");
+        return;
+      }
+
+      const apiURL = `https://api.freecurrencyapi.com/v1/latest?apikey=${API_KEY}&base_currency=${from}`;
+
+      try {
+        const response = await fetch(apiURL);
+        const data = await response.json();
+
+        if (!data || !data.data || !data.data[to]) {
+          throw new Error("Invalid currency or API limit reached.");
+        }
+
+        const rate = data.data[to];
+        const converted = (amount * rate).toFixed(2);
+
+        resultDiv.innerText = `${amount} ${from} = ${converted} ${to}`;
+      } catch (error) {
+        console.error("Conversion error:", error);
+        resultDiv.innerText = "Conversion failed. Please check the API key or currency.";
+      }
+    }
+  </script>
+
+</body>
+</html>
