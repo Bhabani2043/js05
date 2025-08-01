@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modal Window Example</title>
+  <style>
+    /* Basic styling for the page */
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Button to open the modal */
+#openModalBtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+/* The Modal (background overlay) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 400px;
+  text-align: center;
+}
+
+/* Close Button (X) */
+.close {
+  color: #aaa;
+  font-size: 30px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Close Button (Close) */
+.close-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #ff4d4d;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 5px;
+}
+  </style>
+</head>
+<body>
+  <!-- Button to open the Modal -->
+  <button id="openModalBtn">Open Modal</button>
+
+  <!-- The Modal -->
+  <div id="modal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span id="closeModalBtn" class="close">&times;</span>
+      <h2>Modal Title</h2>
+      <p>This is a simple modal window.</p>
+      <button id="closeModalBtn2" class="close-btn">Close</button>
+    </div>
+  </div>
+   <script>
+    // Get elements
+const openModalBtn = document.getElementById("openModalBtn");
+const modal = document.getElementById("modal");
+const closeModalBtn = document.getElementById("closeModalBtn");
+const closeModalBtn2 = document.getElementById("closeModalBtn2");
+
+// Open the modal when the user clicks the "Open Modal" button
+openModalBtn.onclick = function () {
+  modal.style.display = "flex"; // Show the modal
+};
+
+// Close the modal when the user clicks the (X) button or the "Close" button
+closeModalBtn.onclick = function () {
+  modal.style.display = "none"; // Hide the modal
+};
+
+closeModalBtn2.onclick = function () {
+  modal.style.display = "none"; // Hide the modal
+};
+
+// Close the modal if the user clicks anywhere outside of the modal content
+window.onclick = function (event) {
+  if (event.target === modal) {
+    modal.style.display = "none"; // Hide the modal
+  }
+};
+  </script>
+</body>
+</html>
