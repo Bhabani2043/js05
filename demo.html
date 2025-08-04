@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Drag & Drop File Uploader</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 40px;
+    background: #f9f9f9;
+  }
+  h1{
+    margin: 20px;
+    padding: 30px;
+  }
+
+  .upload-area {
+    border: 3px dashed #aaa;
+    border-radius: 10px;
+    padding: 40px;
+    text-align: center;
+    color: #666;
+    cursor: pointer;
+    transition: border-color 0.3s;
+    margin: 60px;
+    
+  }
+  .upload-area.dragover {
+    border-color: #4a90e2;
+    background-color: #e8f0fe;
+    color: #333;
+  }
+  input[type="file"] {
+    display: none;
+  }
+  .file-list {
+    margin-top: 20px;
+    max-width: 400px;
+  }
+  .file-list-item {
+    background: white;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+</style>
+</head>
+<body>
+
+<h1>Drag & Drop File Uploader</h1>
+
+<label class="upload-area" id="uploadArea">
+  Drag & drop files here or click to select
+  <input type="file" id="fileInput" multiple />
+</label>
+
+<div class="file-list" id="fileList"></div>
+
+<script>
+  const uploadArea = document.getElementById('uploadArea');
+  const fileInput = document.getElementById('fileInput');
+  const fileList = document.getElementById('fileList');
+
+  // Highlight on dragover
+  uploadArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    uploadArea.classList.add('dragover');
+  });
+
+  // Remove highlight on dragleave
+  uploadArea.addEventListener('dragleave', (e) => {
+    e.preventDefault();
+    uploadArea.classList.remove('dragover');
+  });
+
+  // Handle dropped files
+  uploadArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    uploadArea.classList.remove('dragover');
+    const droppedFiles = e.dataTransfer.files;
+    handleFiles(droppedFiles);
+  });
+
+  // Handle file input selection
+  fileInput.addEventListener('change', () => {
+    handleFiles(fileInput.files);
+  });
+
+  // Helper function to display files
+  function handleFiles(files) {
+    for (let file of files) {
+      const item = document.createElement('div');
+      item.className = 'file-list-item';
+      item.textContent = `${file.name} (${formatBytes(file.size)})`;
+      fileList.appendChild(item);
+    }
+  }
+
+  // Format bytes to KB, MB, etc
+  function formatBytes(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024,
+      sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'],
+      i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+</script>
+
+</body>
+</html>
