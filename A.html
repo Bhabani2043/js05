@@ -1,0 +1,33 @@
+<script>
+    let height = parseInt(prompt("Enter the height for the letter 'A':"));
+
+function printLetterA(height) {
+  if (isNaN(height) || height < 3) {
+    console.log("Please enter a valid number (3 or higher).");
+    return;
+  }
+
+  let mid = Math.floor(height / 2);
+
+  for (let i = 0; i < height; i++) {
+    let row = '';
+
+    for (let j = 0; j <= height; j++) {
+      if (j === 0 || j === height) {
+        row += (i === 0) ? ' ' : '*'; // sides (skip top corners)
+      } else if (i === 0 && j > 0 && j < height) {
+        row += '*'; // top of A
+      } else if (i === mid) {
+        row += '*'; // middle line
+      } else {
+        row += ' ';
+      }
+    }
+
+    console.log(row);
+  }
+}
+
+printLetterA(height);
+
+</script>
