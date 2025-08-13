@@ -1,0 +1,37 @@
+<script>
+
+// JavaScript program to print the pattern "D"
+
+      // Function to generate the pattern D
+      function D_Pattern(n) {
+      
+        // loop for rows
+        for (var i = 0; i < n; i++) {
+        
+          // loop for columns
+          for (var j = 0; j <= n; j++) {
+          
+            // Logic to generate stars for *
+            if (
+              j == 1 ||
+              ((i == 0 || i == n - 1) && j > 1 && j < n - 2) ||
+              (j == n - 2 && i != 0 && i != n - 1)
+            )
+              document.write("*");
+            // For the spaces
+            else document.write("&nbsp;&nbsp;");
+          }
+
+          // For changing line
+          document.write("<br>");
+        }
+      }
+
+      // Driver Code
+
+      var n = 9;
+
+      // Function calling
+      D_Pattern(n);
+      
+</script>
