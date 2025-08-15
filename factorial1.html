@@ -1,10 +1,15 @@
 <script>
     function Factorial(n){
-        if(n===1)
+       if (isNaN(n)){
+        return "Please Enter a Number";
+        
+       }else{
+         if(n===1 || n===0)
         return 1
     else{
         return n * Factorial(n-1)
     }
+       }
     }
-    document.write(Factorial(prompt("Enter a number")));
+    document.write(Factorial(parseInt(prompt("Enter a number"))));
 </script>
