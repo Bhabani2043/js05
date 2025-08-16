@@ -1,7 +1,10 @@
 <script>
-    var num = [23,1,2,3,4,5,6,7,8,9,10,11,12,13,14,0,15,16,17]
-    var even = num.filter(n => n % 2 === 0).sort((a, b) => a - b);
+    var input = prompt("Enter numbers separated by commas (e.g. 1,5,8,2,7):");
+    var numArray = input.split(',').map(function(item){
+        return parseInt(item.trim());
+    });
+    var even = numArray.filter(n => n % 2 === 0).sort((a, b) => a - b);
     document.write(`Even Number are = ${even}<br>`);
-    var odd = num.filter(n => n % 2 !== 0).sort((a,b) => a - b);
+    var odd = numArray.filter(n => n % 2 !== 0).sort((a,b) => a - b);
     document.write(`Odd Number are = ${odd}`)
 </script>
