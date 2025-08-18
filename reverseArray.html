@@ -1,0 +1,21 @@
+<script>
+    function reverseArray(arr){
+        let reversed = [];
+        
+        for (let i = arr.length - 1; i >= 0; i--)
+        {
+            reversed.push(arr[i]);
+        }
+
+        return reversed;
+    }
+
+    let input1 = [1, 2, 3, 4];
+    let output1 = reverseArray(input1);
+    console.log(output1);
+
+    let input2 = [10, 20, 30];
+    let output2 = reverseArray(input2);
+    console.log(output2);
+
+</script>
