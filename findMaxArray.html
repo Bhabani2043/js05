@@ -1,0 +1,25 @@
+<script>
+    function findMax(arr){
+        let max = [0];
+
+        for(let i = 1; i < arr.length; i++){
+            if(arr[i] > max){
+                max = arr[i];
+            }
+        }
+
+        return max;
+    }
+
+    let input1 = [3, 7, 2, 9, 5];
+    let output1 = findMax(input1);
+    console.log(output1);
+
+    let input2 = [-5, -1, -9, -3, 1];
+    let output2 = findMax(input2);
+    console.log(output2);
+
+    let input3 = [14, 11, 33, 44];
+    let output3 = findMax(input3);
+    console.log(output3);
+</script>
