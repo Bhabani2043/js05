@@ -1,5 +1,19 @@
-<script>
+<!-- <script>
     let arr = [2,0,4,3,7,9,1,2,2,0,0,3,9,8];
     let maxNum = Math.max(...arr);
+    console.log(maxNum);
+</script> -->
+
+
+<script>
+    let arr = [111,999,21,34,244,53,61,11,44,33,66,99];
+    let maxNum = arr[0];
+
+    for (let i = 1; i < arr.length; i++){
+        if(arr[i] > maxNum){
+            maxNum = arr[i];
+        }
+    }
+
     console.log(maxNum);
 </script>
