@@ -1,5 +1,19 @@
-<script>
+<!-- <script>
     let arr = [1,0,9,2,3,4,6];
     let minNum = Math.min(...arr);
     console.log(minNum);
-</script>
+</script> -->
+
+
+<script>
+    let arr = [11,22,,4,33,44,55,99,9];
+    let minNum = arr[0];
+
+    for(let i = 1; i < arr.length; i++){
+        if (arr[i] < minNum){
+            minNum = arr[i];
+        }
+    }
+
+    console.log("Minimum number is: " + minNum);
+</script>   
