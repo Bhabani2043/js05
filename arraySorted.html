@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
     function checkSorted(arr){
         if(arr.length < 2){
             return "Array is to short to determine order";
@@ -26,6 +26,25 @@
     }
 
 
+
+    console.log(checkSorted([1,2,3,4,5,6,7,8,9]));
+    console.log(checkSorted([9,8,7,6,5,4,3,2,1]));
+    console.log(checkSorted([12,88,44,11]));
+    console.log(checkSorted([44]));
+</script> -->
+
+
+
+
+<script>
+    function checkSorted(arr){
+        const asc = arr.every((v,i,a) => i === 0 || a[i - 1] <= v);
+        const desc = arr.every((v,i,a) => i === 0 || a[i - 1] >= v);
+
+        if(asc) return "Array is sorted in ascending order";
+        if(desc) return "Array is sorted in descending order";
+        return "Array is not sorted";
+    }
 
     console.log(checkSorted([1,2,3,4,5,6,7,8,9]));
     console.log(checkSorted([9,8,7,6,5,4,3,2,1]));
