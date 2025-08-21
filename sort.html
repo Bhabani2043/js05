@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
     let input = prompt("Enter numbers separated by commas (e.g : 2,0,0,3,0,8,0,9)");
 
     let arr = input.split(',').map(Number);
@@ -9,4 +9,51 @@
 
     let descending = [...arr].sort((a, b) => b-a);
     console.log("Descending :" ,descending);
+</script> -->
+
+
+<script>
+    let input = prompt("Enter numbers separated by commas (e.g., 2,0,0,3):");
+
+    let arr = input.split(',').map(str => str.trim()).map(Number);
+
+    if (arr.some(isNaN)) {
+        alert("Please enter only valid numbers.");
+    } else {
+        function bubbleSortAsc(arr) {
+            let n = arr.length;
+            for (let i = 0; i < n - 1; i++) {
+                for (let j = 0; j < n - 1 - i; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        let temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                    }
+                }
+            }
+            return arr;
+        }
+
+
+         function bubbleSortDesc(arr) {
+            let n = arr.length;
+            for (let i = 0; i < n - 1; i++) {
+                for (let j = 0; j < n - 1 - i; j++) {
+                    if (arr[j] < arr[j + 1]) {  // Swap to sort in descending order
+                        let temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                    }
+                }
+            }
+            return arr;
+        }
+
+        let ascendingManual = bubbleSortAsc([...arr]);
+        console.log("Ascending (Bubble Sort):", ascendingManual);
+
+        let descendingSorted = bubbleSortDesc([...arr]);
+        console.log("Descending (Bubble Sort):", descendingSorted);
+    }
 </script>
+
