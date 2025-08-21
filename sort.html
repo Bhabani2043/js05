@@ -1,0 +1,12 @@
+<script>
+    let input = prompt("Enter numbers separated by commas (e.g : 2,0,0,3,0,8,0,9)");
+
+    let arr = input.split(',').map(Number);
+
+
+    let ascending = [...arr].sort((a, b) => a - b);
+    console.log("Ascending :" ,ascending);
+
+    let descending = [...arr].sort((a, b) => b-a);
+    console.log("Descending :" ,descending);
+</script>
