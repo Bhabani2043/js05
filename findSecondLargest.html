@@ -1,0 +1,17 @@
+
+<script>
+    function findSecondLargest(arr) {
+  let uniqueArr = [...new Set(arr)];
+
+  if (uniqueArr.length < 2) {
+    return "Array doesn't have a second largest number";
+  }
+
+  uniqueArr.sort((a, b) => b - a);
+  return uniqueArr[1];
+  }
+
+  let numbers = [10, 5, 8, 10, 3, 8, 9];
+  let secondLargest = findSecondLargest(numbers);
+  console.log("Second largest number is:", secondLargest);
+</script>
