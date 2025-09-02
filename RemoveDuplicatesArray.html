@@ -9,10 +9,33 @@
   const uniqueArr = removeDuplicates(arr);
   console.log(uniqueArr); // [1, 2, 3, 4, 5]
   */
+ /*
  function removeDuplicates(arr) {
   return arr.filter((item, index) => arr.indexOf(item) === index);
   }
   const arr = [1, 2, 2, 3, 4, 4, 5];
   const uniqueArr = removeDuplicates(arr);
   console.log(uniqueArr); // [1, 2, 3, 4, 5]
+  */
+
+ function removeDuplicates(arr) {
+  const seen = {};
+  const result = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    const val = arr[i];
+    if (!seen[val]) {
+      seen[val] = true;
+      result.push(val);
+    }
+  }
+
+  return result;
+}
+
+// Example usage
+const arr = [1, 2, 2, 3, 4, 4, 5];
+const uniqueArr = removeDuplicates(arr);
+console.log(uniqueArr); // [1, 2, 3, 4, 5]
+
 </script>
