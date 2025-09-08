@@ -1,0 +1,21 @@
+
+<script>
+    function countFrequencies(arr) {
+  const frequency = {};
+
+  for (let item of arr) {
+    if (frequency[item]) {
+      frequency[item] += 1;
+    } else {
+      frequency[item] = 1;
+    }
+  }
+
+  return frequency;
+  }
+  const fruits = ['apple', 'banana', 'apple', 'orange', 'banana', 'apple'];
+  const result = countFrequencies(fruits);
+
+  console.log(result); // Output: { apple: 3, banana: 2, orange: 1 }
+
+</script>
